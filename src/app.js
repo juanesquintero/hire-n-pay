@@ -47,7 +47,8 @@ app.get('/contracts', async (req, res) => {
 
     const contracts = await Contract.findAll({
         where: {
-            [userColumn]: id
+            [userColumn]: id,
+            status: { [Op.ne]: 'terminated' },
         }
     });
 

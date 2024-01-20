@@ -35,14 +35,14 @@ app.get('/contracts/:id', async (req, res) => {
 
 /**
  *
- * @returns contracts of user (client or contractor)
+ * @returns non terminated contracts of user (client or contractor)
  */
 app.get('/contracts', async (req, res) => {
     const { Contract } = req.app.get('models')
     const { id, type } = req.profile;
     const userColumn = {
         'client': 'ClientId',
-        'contractor': 'ContractIdId',
+        'contractor': 'ContractId',
     }[type];
 
     const contracts = await Contract.findAll({
@@ -54,6 +54,34 @@ app.get('/contracts', async (req, res) => {
 
     if (!contracts) return res.status(404).end()
     res.json(contracts)
+})
+
+/**
+ *
+ * @returns jobs unpaid (client or contractor) for active contracts
+ */
+app.get('/jobs/unpaid', async (req, res) => {
+    const { Job, Contract } = req.app.get('models')
+    const { id, type } = req.profile;
+    const userColumn = {
+        'client': 'ClientId',
+        'contractor': 'ContractId',
+    }[type];
+
+
+    const jobs = await Job.findAll({
+        where: { paid: null },
+        include: [{
+            model: Contract,
+            where: {
+                status: 'in_progress',
+                [userColumn]: id,
+            }
+        }]
+    });
+
+    if (!jobs) return res.status(404).end()
+    res.json(jobs)
 })
 
 module.exports = app;

@@ -5,7 +5,13 @@ profile_id: 1
 
 
 ### GET /contracts
-# Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
+# Returns a list of contracts belonging to a user (client or contractor)
+# The list should only contain non terminated contracts.
 GET http://localhost:3001/contracts/ HTTP/1.1
 profile_id: 1
 
+### GET /jobs/unpaid
+# Get all unpaid jobs for a user (either a client or contractor), 
+# or active contracts only.
+GET http://localhost:3001/jobs/unpaid HTTP/1.1
+profile_id: 1

@@ -8,6 +8,7 @@ profile_id: 1
 # Returns a list of contracts belonging to a user (client or contractor)
 # The list should only contain non terminated contracts.
 GET http://localhost:3001/contracts/ HTTP/1.1
+Content-Type: application/json
 profile_id: 1
 
 
@@ -15,6 +16,7 @@ profile_id: 1
 # Get all unpaid jobs for a user (either a client or contractor), 
 # or active contracts only.
 GET http://localhost:3001/jobs/unpaid HTTP/1.1
+Content-Type: application/json
 profile_id: 1
 
 
@@ -22,4 +24,16 @@ profile_id: 1
 # Pay for a job, a client can only pay if his balance >= the amount to pay. 
 # The amount should be moved from the client's balance to the contractor balance.
 POST http://localhost:3001/jobs/2/pay HTTP/1.1
+Content-Type: application/json
 profile_id: 1
+
+### POST /balances/deposit/:userId
+# Deposits money into the the the balance of a client,
+# A client can't deposit more than 25% his total of jobs to pay. (at the deposit moment)
+POST http://localhost:3001/balances/deposit/1 HTTP/1.1
+profile_id: 1
+Content-Type: application/json
+
+{
+    "amount": 50
+}

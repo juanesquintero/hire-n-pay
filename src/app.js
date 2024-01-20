@@ -4,6 +4,7 @@ const { sequelize } = require('./model')
 const { getProfile } = require('./middleware/getProfile')
 const contracts = require('./routers/contracts')
 const jobs = require('./routers/jobs')
+const users = require('./routers/users')
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(getProfile);
 // Routers
 app.use('/contracts', contracts)
 app.use('/jobs', jobs)
+app.use('/', users)
 
 
 module.exports = app;

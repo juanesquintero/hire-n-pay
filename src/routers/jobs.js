@@ -29,17 +29,21 @@ router.get('/unpaid', async (req, res) => {
     res.json(jobs)
 })
 
-router.post('/:job_id/pay', async (req, res, next) => {
+/**
+ * POST /jobs/:job_id/pay
+ * @returns payment transaction status of a job
+ */
+router.post('/:id/pay', async (req, res, next) => {
     const { Job, Contract, Profile } = req.app.get('models')
     const sequelize = req.app.get('sequelize')
-    const jobId = req.params.job_id;
+    const id = req.params.id;
     const client = req.profile;
 
     if (client?.type !== 'client') {
         return res.status(403).send('Forbidden');
     }
 
-    const job = await Job.findByPk(jobId, { include: [Contract] });
+    const job = await Job.findByPk(id, { include: [Contract] });
     if (!job || job?.Contract?.status !== 'in_progress') {
         return res.status(404).send('Job not found or not active');
     }
@@ -69,13 +73,13 @@ router.post('/:job_id/pay', async (req, res, next) => {
         await contractor.save({ transaction });
         await job.save({ transaction });
 
-        // Commit the transaction
+        // Commit transaction
         await transaction.commit();
         res.send('Job has been paid successfully!');
     } catch (error) {
-        // rollback the transaction if an error occurred
+        // Rollback transaction if an error occurred
         await transaction.rollback();
-        throw error;
+        next(error);
     }
 
 });

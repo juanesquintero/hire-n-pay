@@ -14,7 +14,7 @@ app.set('models', sequelize.models)
 app.use(getProfile);
 
 /**
- * FIX ME!
+ *
  * @returns contract by id
  */
 app.get('/contracts/:id', async (req, res) => {
@@ -31,6 +31,28 @@ app.get('/contracts/:id', async (req, res) => {
 
     if (!contract) return res.status(404).end()
     res.json(contract)
+})
+
+/**
+ *
+ * @returns contracts of user (client or contractor)
+ */
+app.get('/contracts', async (req, res) => {
+    const { Contract } = req.app.get('models')
+    const { id, type } = req.profile;
+    const userColumn = {
+        'client': 'ClientId',
+        'contractor': 'ContractIdId',
+    }[type];
+
+    const contracts = await Contract.findAll({
+        where: {
+            [userColumn]: id
+        }
+    });
+
+    if (!contracts) return res.status(404).end()
+    res.json(contracts)
 })
 
 module.exports = app;

@@ -1,8 +1,11 @@
-# GET /contracts/:id
-# return the contract only if it belongs to the profile calling. better fix that!
+### GET /contracts/:id
+# Returns the contract only if it belongs to the profile calling.
 GET http://localhost:3001/contracts/1 HTTP/1.1
 profile_id: 1
 
 
-###
+### GET /contracts
+# Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
+GET http://localhost:3001/contracts/ HTTP/1.1
+profile_id: 1
 

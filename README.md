@@ -99,4 +99,9 @@ Thank you and good luck! 🙏
 
 
 ## Future Work (Nice to Have):
-- [ ] Add a swagger ui support with [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
+- [ ] Swagger UI support with [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
+- [ ] Controller Layer for warping and isolating the business logic of operations for each entity
+
+### Important Note:
+
+Please use the `requests.http` file as a reference to test the API on your own http client... or just add the VSCode [Rest Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension and use the file as http client easily!

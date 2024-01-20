@@ -1,4 +1,4 @@
-# DEEL BACKEND TASK
+# BACKEND TASK
 
 💫 Welcome! 🎉
 
@@ -96,3 +96,7 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, zip your repo (make sure to include .git folder) and send us the zip.
 
 Thank you and good luck! 🙏
+
+
+## Future Work (Nice to Have):
+- [ ] Add a swagger ui support with [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)

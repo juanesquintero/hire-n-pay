@@ -63,7 +63,7 @@ Below is a list of the required API's for the application.
 
 3. **_GET_** `/admin/best-profession?start=<date>&end=<date>` - Returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range.
 
-4. **_GET_** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - returns the clients the paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2.
+4. **_GET_** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - returns the clients that paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2.
 
 ```
  [
@@ -100,7 +100,11 @@ Thank you and good luck! 🙏
 
 ## Future Work (Nice to Have):
 - [ ] Swagger UI support with [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
-- [ ] Controller Layer for warping and isolating the business logic of operations for each entity
+- [ ] Controller or Service Layer for warping and isolating the business logic of operations for each entity
+- [x] Testing for e2e with supertest
+- [ ] Test with just unit test as well using jest mocks
+- [ ] Admin middleware validation with a api key could be
+- [ ] Global error handling with rest/json formatting
 
 ### Important Note:
 

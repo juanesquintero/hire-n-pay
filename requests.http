@@ -40,7 +40,7 @@ profile_id: 1
 Content-Type: application/json
 
 {
-    "amount": 50
+    "amount": 50.1
 }
 
 
@@ -49,5 +49,14 @@ Content-Type: application/json
 # Returns the profession that earned the most money (sum of jobs paid)
 # for any contactor that worked in the query time range.
 GET http://localhost:3001/admin/best-profession?start=2020-08-10 00:00:00&end=2020-08-18 00:00:00 HTTP/1.1
+Content-Type: application/json
+profile_id: 1
+
+
+
+### GET /admin/best-clients?start=<date>&end=<date>&limit=<integer>
+# Returns the clients the paid the most for jobs in the query time period.
+# Limit query parameter should be applied, default limit is 2.
+GET http://localhost:3001/admin/best-clients?start=2020-08-10 00:00:00&end=2020-08-18 00:00:00&limit=4 HTTP/1.1
 Content-Type: application/json
 profile_id: 1

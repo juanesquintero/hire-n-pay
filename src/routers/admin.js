@@ -53,4 +53,47 @@ router.get('/best-profession', async (req, res) => {
 
 });
 
+/**
+ * GET /admin/best-clients
+ * @returns
+ */
+router.get('/best-clients', async (req, res) => {
+    const { Job, Contract, Profile } = req.app.get('models')
+    let { limit, start, end } = req.query;
+
+    try {
+        [start, end] = [new Date(start), new Date(end)]
+        limit = limit ? parseInt(limit) : 2;
+    } catch (err) {
+        return res.status(400).send('Missing or worng dates and limit');
+    }
+
+    const clientsRanking = await Job.findAll({
+        where: {
+            paid: true,
+            paymentDate: {
+                [Op.between]: [start, end]
+            }
+        },
+        include: [{
+            model: Contract,
+            attributes: [],
+            include: [{
+                model: Profile,
+                as: 'Client',
+                attributes: ['id', 'firstName', 'lastName']
+            }]
+        }],
+        attributes: [
+            [fn('sum', col('price')), 'paid'],
+            [col('Contract.Client.id'), 'id'],
+            [fn('concat', col('Contract.Client.firstName'), ' ', col('Contract.Client.lastName')), 'fullName']
+        ],
+        group: ['Contract.Client.id'],
+        order: [[fn('sum', col('price')), 'DESC']],
+        limit: limit
+    });
+    res.json(clientsRanking);
+});
+
 module.exports = router

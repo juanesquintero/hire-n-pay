@@ -8,11 +8,12 @@ const jobs = require('./routers/jobs')
 const app = express();
 
 app.use(bodyParser.json());
+
+// App Globas
 app.set('sequelize', sequelize)
 app.set('models', sequelize.models)
 
 // Middlewares
-// Get auth profile middleware
 app.use(getProfile);
 
 // Routers

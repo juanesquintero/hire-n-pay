@@ -3,7 +3,7 @@ const router = express.Router()
 const { Op } = require('sequelize')
 
 /**
- *
+ * GET /contracts/:id
  * @returns contract by id
  */
 router.get('/:id', async (req, res) => {
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
 })
 
 /**
- *
+ * GET /contracts
  * @returns non terminated contracts of user (client or contractor)
  */
 router.get('/', async (req, res) => {

@@ -3,7 +3,7 @@ const router = express.Router()
 const { Op } = require('sequelize')
 
 /**
- *
+ * GET /unpaid
  * @returns jobs unpaid (client or contractor) for active contracts
  */
 router.get('/unpaid', async (req, res) => {

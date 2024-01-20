@@ -1,0 +1,8 @@
+# GET /contracts/:id
+# return the contract only if it belongs to the profile calling. better fix that!
+GET http://localhost:3001/contracts/1 HTTP/1.1
+profile_id: 1
+
+
+###
+

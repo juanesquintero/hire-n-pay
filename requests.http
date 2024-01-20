@@ -4,6 +4,7 @@ GET http://localhost:3001/contracts/1 HTTP/1.1
 profile_id: 1
 
 
+
 ### GET /contracts
 # Returns a list of contracts belonging to a user (client or contractor)
 # The list should only contain non terminated contracts.
@@ -12,20 +13,24 @@ Content-Type: application/json
 profile_id: 1
 
 
+
 ### GET /jobs/unpaid
-# Get all unpaid jobs for a user (either a client or contractor), 
+# Get all unpaid jobs for a user (either a client or contractor),
 # or active contracts only.
 GET http://localhost:3001/jobs/unpaid HTTP/1.1
 Content-Type: application/json
 profile_id: 1
 
 
+
 ### POST /jobs/:job_id/pay
-# Pay for a job, a client can only pay if his balance >= the amount to pay. 
+# Pay for a job, a client can only pay if his balance >= the amount to pay.
 # The amount should be moved from the client's balance to the contractor balance.
 POST http://localhost:3001/jobs/2/pay HTTP/1.1
 Content-Type: application/json
 profile_id: 1
+
+
 
 ### POST /balances/deposit/:userId
 # Deposits money into the the the balance of a client,
@@ -37,3 +42,12 @@ Content-Type: application/json
 {
     "amount": 50
 }
+
+
+
+### GET /admin/best-profession?start=<date>&end=<date>
+# Returns the profession that earned the most money (sum of jobs paid)
+# for any contactor that worked in the query time range.
+GET http://localhost:3001/admin/best-profession?start=2020-08-10 00:00:00&end=2020-08-18 00:00:00 HTTP/1.1
+Content-Type: application/json
+profile_id: 1
